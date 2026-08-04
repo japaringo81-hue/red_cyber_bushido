@@ -4,89 +4,130 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --font-heading: ui-sans-serif, system-ui, sans-serif;
-    --font-body: ui-sans-serif, system-ui, sans-serif;
-    --font-display: ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    --background: 0 0% 4%;
+    --foreground: 230 4% 89%;
+    --card: 0 0% 6%;
+    --card-foreground: 230 4% 89%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 230 4% 89%;
+    --primary: 0 0% 89%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 230 4% 89%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 348 100% 50%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 348 100% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 348 100% 50%;
+    --crimson: #FF003C;
+    --obsidian: #0A0A0B;
+    --steel: #E2E2E2;
+    --ghost: #888888;
+    --radius: 0px;
+    --font-heading: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'JetBrains Mono', ui-monospace, monospace;
+    --font-display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-kana: 'Zen Kaku Gothic New', 'Archivo', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   }
 }
 
-
-
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground font-body antialiased;
+    background-color: var(--obsidian);
   }
+
+  ::selection {
+    background: var(--crimson);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--obsidian); }
+  ::-webkit-scrollbar-thumb { background: #1f1f22; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--crimson); }
+}
+
+@layer utilities {
+  .text-steel { color: var(--steel); }
+  .text-ghost { color: var(--ghost); }
+  .text-crimson { color: var(--crimson); }
+  .bg-obsidian { background-color: var(--obsidian); }
+  .bg-crimson { background-color: var(--crimson); }
+  .border-crimson { border-color: var(--crimson); }
+
+  .font-heading { font-family: var(--font-heading); }
+  .font-kana { font-family: var(--font-kana); }
+
+  .tracking-tightest { letter-spacing: -0.05em; }
+  .tracking-widest-x { letter-spacing: 0.4em; }
+
+  .edge-line {
+    background-image: linear-gradient(90deg, transparent, var(--crimson) 50%, transparent);
+  }
+
+  .glitch-text {
+    text-shadow:
+      2px 0 rgba(255, 0, 60, 0.45),
+      -2px 0 rgba(0, 200, 255, 0.35);
+  }
+
+  .hud-border {
+    border: 1px solid #1c1c1f;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  }
+
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .clip-corner {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-120%); }
+    100% { transform: translateX(120%); }
+  }
+  .animate-shimmer { animation: shimmer 2.4s ease-in-out infinite; }
+
+  @keyframes sheath-up {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(0); }
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  .animate-scan { animation: scan 4s linear infinite; }
+
+  @keyframes pulse-edge {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  .animate-pulse-edge { animation: pulse-edge 2.5s ease-in-out infinite; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  @keyframes sheathClose {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(0); }
+  }
+  .animate-sheath { transform-origin: top; animation: sheathClose 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
+  .animate-sheath-delay { animation-delay: 0.15s; }
 }
