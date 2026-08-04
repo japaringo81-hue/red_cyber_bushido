@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { Send, Loader2, Github, Linkedin, Mail } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import KanjiWatermark from "@/components/cyber-bushido/KanjiWatermark";
+import Term from "@/components/cyber-bushido/Term";
+import Magnetic from "@/components/cyber-bushido/Magnetic";
+import ImpactButton from "@/components/cyber-bushido/ImpactButton";
 
 // NOTE: Replace these URLs with your real profiles. They are live anchor tags.
 const SOCIALS = [
@@ -50,8 +53,9 @@ export default function TheCode() {
             <div className="flex items-center gap-4 mb-5">
               <span className="font-mono text-[11px] text-crimson tracking-hud">04</span>
               <span className="h-px w-12 bg-crimson" />
-              <span className="font-mono text-[11px] tracking-hud uppercase text-ghost">
-                掟 — THE CODE
+              <span className="font-mono text-[11px] tracking-hud uppercase text-ghost inline-flex items-center gap-2">
+                <Term kana="掟" reading="okite" meaning="The code; an oath that binds the warrior" className="text-steel text-base" />
+                — THE CODE
               </span>
             </div>
             <h2 className="font-heading font-extrabold uppercase tracking-forged text-bone text-[11vw] md:text-[6vw] leading-[0.85]">
@@ -93,7 +97,7 @@ export default function TheCode() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="surface-steel blade-card px-8 py-14 clip-corner-bl text-center"
               >
-                <span className="font-kana text-5xl text-crimson/40 block mb-5">礼</span>
+                <Term kana="礼" reading="rei" meaning="Respect — the courtesy of a formal bow" bare as="span" className="font-kana text-5xl text-crimson/40 block mb-5" />
                 <h3 className="font-heading font-extrabold uppercase tracking-forged text-bone text-2xl mb-4">
                   Challenge received.
                 </h3>
@@ -149,23 +153,25 @@ export default function TheCode() {
                   <p className="font-mono text-[11px] text-crimson -mt-4">{err}</p>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  className="group flex items-center gap-4 bg-crimson text-white px-8 py-4 font-mono text-xs tracking-hud uppercase hover:bg-bone hover:text-void transition-colors duration-300 disabled:opacity-60"
-                >
-                  {status === "sending" ? (
-                    <>
-                      <Loader2 size={14} className="animate-spin" />
-                      Forging the signal
-                    </>
-                  ) : (
-                    <>
-                      Send the challenge
-                      <Send size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </button>
+                <Magnetic strength={0.2}>
+                  <ImpactButton
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="group flex items-center gap-4 bg-crimson text-white px-8 py-4 font-mono text-xs tracking-hud uppercase hover:bg-bone hover:text-void transition-colors duration-300 disabled:opacity-60"
+                  >
+                    {status === "sending" ? (
+                      <>
+                        <Loader2 size={14} className="animate-spin" />
+                        Forging the signal
+                      </>
+                    ) : (
+                      <>
+                        Send the challenge
+                        <Send size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </ImpactButton>
+                </Magnetic>
               </form>
             )}
           </div>

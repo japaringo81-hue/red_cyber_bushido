@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { TRIALS } from "@/data/trials";
 import KanjiWatermark from "@/components/cyber-bushido/KanjiWatermark";
+import Term from "@/components/cyber-bushido/Term";
 
 const accentText = {
   crimson: "text-crimson",
@@ -25,8 +26,9 @@ export default function ThePath() {
           <div className="flex items-center gap-4 mb-5">
             <span className="font-mono text-[11px] text-crimson tracking-hud">02</span>
             <span className="h-px w-12 bg-crimson" />
-            <span className="font-mono text-[11px] tracking-hud uppercase text-ghost">
-              道 — THE PATH
+            <span className="font-mono text-[11px] tracking-hud uppercase text-ghost inline-flex items-center gap-2">
+              <Term kana="道" reading="dō" meaning="The way; a lifelong path of discipline" className="text-steel text-base" />
+              — THE PATH
             </span>
           </div>
           <h2 className="font-heading font-extrabold uppercase tracking-forged text-bone text-[11vw] md:text-[6vw] leading-[0.86]">
@@ -54,9 +56,14 @@ export default function ThePath() {
               <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
                 {/* number marker */}
                 <div className="flex md:flex-col items-baseline md:items-start gap-4 md:gap-1 md:w-20 shrink-0">
-                  <span className="font-kana font-black text-4xl md:text-5xl text-white/10 group-hover:text-crimson/40 transition-colors leading-none">
-                    {t.num}
-                  </span>
+                  <Term
+                    kana={t.num}
+                    reading={t.numRead}
+                    meaning={t.numMean}
+                    bare
+                    as="span"
+                    className="font-kana font-black text-4xl md:text-5xl text-white/10 group-hover:text-crimson/40 transition-colors leading-none"
+                  />
                   <span className="font-mono text-[10px] tracking-hud text-ghost">
                     {String(i + 1).padStart(2, "0")} / {String(TRIALS.length).padStart(2, "0")}
                   </span>
@@ -80,12 +87,14 @@ export default function ThePath() {
 
                 {/* arrow + kana */}
                 <div className="flex md:flex-col items-center md:items-end gap-4 shrink-0">
-                  <span
-                    className={`font-kana font-bold text-2xl ${accentText[t.accent]} opacity-40 group-hover:opacity-100 transition-opacity`}
-                    style={{ textShadow: "0 0 12px currentColor" }}
-                  >
-                    {t.kana}
-                  </span>
+                  <Term
+                    kana={t.kana}
+                    reading={t.kanaRead}
+                    meaning={t.kanaMean}
+                    bare
+                    as="span"
+                    className={`font-kana font-bold text-2xl ${accentText[t.accent]} opacity-60 group-hover:opacity-100 transition-opacity`}
+                  />
                   <span className="flex items-center gap-2 font-mono text-[10px] tracking-hud uppercase text-steel group-hover:text-crimson transition-colors">
                     Enter
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />

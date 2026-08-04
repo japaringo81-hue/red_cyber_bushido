@@ -7,6 +7,9 @@ import CustomCursor from "@/components/cyber-bushido/CustomCursor";
 import ScanLines from "@/components/cyber-bushido/ScanLines";
 import KanjiWatermark from "@/components/cyber-bushido/KanjiWatermark";
 import BladeSweep from "@/components/cyber-bushido/BladeSweep";
+import Term from "@/components/cyber-bushido/Term";
+import Magnetic from "@/components/cyber-bushido/Magnetic";
+import ImpactButton from "@/components/cyber-bushido/ImpactButton";
 
 const accentColor = {
   crimson: "var(--crimson)",
@@ -64,12 +67,19 @@ export default function Trial() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <span className="font-kana font-black text-3xl" style={{ color: accent }}>
-                {trial.num}
-              </span>
+              <Term
+                kana={trial.num}
+                reading={trial.numRead}
+                meaning={trial.numMean}
+                bare
+                as="span"
+                className="font-kana font-black text-3xl"
+                style={{ color: accent }}
+              />
               <span className="h-px w-12" style={{ background: accent }} />
-              <span className="font-mono text-[11px] tracking-hud uppercase text-ghost">
-                試練 — TRIAL · {trial.category}
+              <span className="font-mono text-[11px] tracking-hud uppercase text-ghost inline-flex items-center gap-2">
+                <Term kana="試練" reading="shiren" meaning="A trial; a test that shapes you" className="text-steel text-base" />
+                — TRIAL · {trial.category}
               </span>
             </div>
             <h1 className="font-heading font-extrabold uppercase tracking-forged text-bone text-[14vw] md:text-[9vw] leading-[0.82]">
@@ -139,9 +149,15 @@ export default function Trial() {
                     <span className="font-mono text-xs tracking-hud text-ghost">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="font-kana text-2xl" style={{ color: accent, opacity: 0.7 }}>
-                      {t.kana}
-                    </span>
+                    <Term
+                      kana={t.kana}
+                      reading={t.kanaRead}
+                      meaning={t.kanaMean}
+                      bare
+                      as="span"
+                      className="font-kana text-2xl"
+                      style={{ color: accent, opacity: 0.9 }}
+                    />
                   </div>
                   <h3 className="font-heading font-extrabold uppercase tracking-forged text-bone text-2xl md:text-3xl mb-4">
                     {t.name}
@@ -223,16 +239,15 @@ export default function Trial() {
           <h2 className="font-heading font-extrabold uppercase tracking-forged text-bone text-3xl md:text-4xl mb-10">
             The trial is complete.
           </h2>
-          <button
-            onClick={() => navigate("/#path")}
-            className="group inline-flex items-center gap-4 border border-crimson/60 px-10 py-5 font-mono text-xs tracking-hud uppercase text-bone hover:text-white transition-colors relative overflow-hidden"
-          >
-            <span className="relative z-10 flex items-center gap-3">
+          <Magnetic strength={0.3}>
+            <ImpactButton
+              onClick={() => navigate("/#path")}
+              className="group inline-flex items-center gap-3 border border-crimson/60 px-10 py-5 font-mono text-xs tracking-hud uppercase text-bone hover:text-white hover:bg-crimson transition-colors duration-300"
+            >
               Return to the Path
               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </span>
-            <span className="absolute inset-0 bg-crimson -translate-x-full group-hover:translate-x-0 transition-transform duration-500 easing-blade" />
-          </button>
+            </ImpactButton>
+          </Magnetic>
         </div>
       </section>
     </div>

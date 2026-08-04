@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import TheGateTerm from "@/components/cyber-bushido/Term";
+import Magnetic from "@/components/cyber-bushido/Magnetic";
+import ImpactButton from "@/components/cyber-bushido/ImpactButton";
 
 const EMBLEM_IMG =
   "https://media.base44.com/images/public/6a71557ce6468ab881f19b8a/384bf34ed_generated_image.png";
@@ -40,40 +43,44 @@ export default function TheGate({ onEnter }) {
         ))}
       </div>
 
-      {/* Torii gate */}
+      {/* Torii gate — pushed back, low opacity, sits BEHIND content */}
       <svg
-        viewBox="0 0 400 420"
-        className="absolute h-[78vh] max-h-[640px] w-auto z-10"
+        viewBox="0 0 400 440"
+        className="absolute h-[92vh] max-h-[720px] w-auto z-0"
         fill="none"
         stroke="var(--steel)"
-        strokeWidth="3"
-        style={{ filter: "drop-shadow(0 0 12px rgba(255,0,60,0.18))" }}
+        strokeWidth="2.5"
+        style={{ opacity: 0.16 }}
       >
-        {/* kasagi (top curved beam) */}
         <motion.path
-          d="M40 60 Q200 20 360 60 L360 78 Q200 40 40 78 Z"
+          d="M30 64 Q200 16 370 64 L370 84 Q200 38 30 84 Z"
           {...pillar}
           transition={{ duration: 1, ease, delay: 0.2 }}
         />
-        {/* shimaki (second beam) */}
-        <motion.line x1="70" y1="110" x2="330" y2="110"
+        <motion.line x1="64" y1="118" x2="336" y2="118"
           {...pillar} transition={{ duration: 0.7, ease, delay: 0.9 }} />
-        {/* nuki (middle bar) */}
-        <motion.line x1="80" y1="160" x2="320" y2="160"
+        <motion.line x1="84" y1="172" x2="316" y2="172"
           {...pillar} transition={{ duration: 0.6, ease, delay: 1.2 }} />
-        {/* left pillar */}
-        <motion.line x1="120" y1="80" x2="120" y2="400"
+        <motion.line x1="104" y1="84" x2="104" y2="420"
           {...pillar} transition={{ duration: 1.1, ease, delay: 0.5 }} />
-        {/* right pillar */}
-        <motion.line x1="280" y1="80" x2="280" y2="400"
+        <motion.line x1="296" y1="84" x2="296" y2="420"
           {...pillar} transition={{ duration: 1.1, ease, delay: 0.5 }} />
-        {/* gakuzuka (center tablet) */}
-        <motion.line x1="190" y1="80" x2="210" y2="80"
+        <motion.line x1="188" y1="84" x2="212" y2="84"
           {...pillar} transition={{ duration: 0.3, ease, delay: 1.5 }} />
       </svg>
 
+      {/* clean zone — radial darkening behind text so the gate never intersects content */}
+      <div
+        className="absolute z-[5] inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(46% 42% at 50% 48%, rgba(10,10,15,0.92) 0%, rgba(10,10,15,0.7) 55%, rgba(10,10,15,0) 100%)",
+        }}
+      />
+      <div className="absolute inset-0 z-[6] pointer-events-none bg-gradient-to-t from-void via-transparent to-void/70" />
+
       {/* emblem + content */}
-      <div className="relative z-20 flex flex-col items-center text-center px-6">
+      <div className="relative z-20 flex flex-col items-center text-center px-6 py-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.6, filter: "blur(8px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0)" }}
@@ -93,8 +100,10 @@ export default function TheGate({ onEnter }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease, delay: 2.2 }}
         >
-          <span className="font-mono text-[11px] tracking-hud uppercase text-crimson">
-            道 · THE WAY OF THE DIGITAL WARRIOR
+          <span className="font-mono text-[11px] tracking-hud uppercase text-crimson inline-flex items-center gap-2">
+            <TheGateTerm kana="道" reading="dō" meaning="The way; a path of lifelong discipline" />
+            <span className="text-ghost">·</span>
+            THE WAY OF THE DIGITAL WARRIOR
           </span>
         </motion.div>
 
@@ -102,7 +111,7 @@ export default function TheGate({ onEnter }) {
           initial={{ opacity: 0, y: 24, letterSpacing: "0.1em" }}
           animate={{ opacity: 1, y: 0, letterSpacing: "-0.02em" }}
           transition={{ duration: 1, ease, delay: 2.4 }}
-          className="mt-3 font-heading font-extrabold uppercase tracking-forged text-bone text-[13vw] md:text-[7vw] leading-[0.85]"
+          className="mt-4 font-heading font-extrabold uppercase tracking-forged text-bone text-[13vw] md:text-[7vw] leading-[0.85]"
         >
           Cyber<span className="text-crimson">Bushido</span>
         </motion.h1>
@@ -113,17 +122,15 @@ export default function TheGate({ onEnter }) {
           transition={{ duration: 0.8, ease, delay: 2.9 }}
           className="mt-10"
         >
-          <button
-            onClick={enter}
-            className="group relative overflow-hidden border border-crimson/60 px-10 py-4 font-mono text-xs tracking-hud uppercase text-bone hover:text-white transition-colors duration-300"
-          >
-            <span className="relative z-10 flex items-center gap-3">
+          <Magnetic strength={0.35}>
+            <ImpactButton
+              onClick={enter}
+              className="group border border-crimson/60 px-10 py-4 font-mono text-xs tracking-hud uppercase text-bone hover:text-white hover:bg-crimson transition-colors duration-300"
+            >
               Enter the Path
-              <span className="block w-6 h-px bg-crimson group-hover:w-10 transition-all" />
-            </span>
-            <span className="absolute inset-0 bg-crimson -translate-x-full group-hover:translate-x-0 transition-transform duration-500 easing-blade" />
-            <span className="absolute inset-0 z-0 bg-crimson/0 group-hover:bg-crimson/20 transition-colors" />
-          </button>
+              <span className="block w-6 h-px bg-crimson group-hover:bg-white group-hover:w-10 transition-all duration-300" />
+            </ImpactButton>
+          </Magnetic>
         </motion.div>
 
         <motion.p
@@ -132,7 +139,7 @@ export default function TheGate({ onEnter }) {
           transition={{ delay: 3.4, duration: 1 }}
           className="mt-8 font-mono text-[10px] tracking-hud text-ghost/70"
         >
-          [ SKIPPABLE — THE GATE WILL NOT RETURN ]
+          [ THE GATE WILL NOT RETURN — SKIPS ON YOUR NEXT VISIT ]
         </motion.p>
       </div>
     </motion.section>
