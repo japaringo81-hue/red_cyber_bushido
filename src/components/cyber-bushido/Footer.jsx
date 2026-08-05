@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useLang } from "@/lib/LanguageContext";
 
-// NOTE: Replace with your real profiles — these are live anchor tags.
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/your-handle", icon: Github },
   { label: "LinkedIn", href: "https://linkedin.com/in/your-handle", icon: Linkedin },
@@ -8,6 +8,7 @@ const SOCIALS = [
 ];
 
 export default function Footer() {
+  const { t } = useLang();
   return (
     <footer className="relative bg-void border-t border-white/5">
       <div className="h-px w-full bg-gradient-to-r from-transparent via-crimson/40 to-transparent" />
@@ -20,8 +21,8 @@ export default function Footer() {
                 Cyber<span className="text-crimson">Bushido</span>
               </span>
             </div>
-            <p className="mt-3 font-mono text-[11px] tracking-hud text-ghost/80 max-w-md">
-              The blade is not sharpened by force — but by patience.
+            <p className="mt-3 font-body text-sm text-ghost max-w-md leading-[1.6]">
+              {t("footer.tagline")}
             </p>
           </div>
 
@@ -34,7 +35,7 @@ export default function Footer() {
                   href={s.href}
                   target={s.href.startsWith("mailto:") ? undefined : "_blank"}
                   rel="noreferrer"
-                  className="group flex items-center gap-2 font-mono text-[10px] tracking-hud uppercase text-ghost hover:text-crimson transition-colors border border-white/8 hover:border-crimson/50 px-3 py-2 clip-corner-bl"
+                  className="group flex items-center gap-2 font-mono text-[10px] tracking-hud uppercase text-ghost hover:text-crimson transition-colors border border-white/8 hover:border-crimson/50 px-3 py-2 clip-corner-bl min-h-[40px]"
                 >
                   <Icon size={13} />
                   {s.label}
@@ -44,7 +45,7 @@ export default function Footer() {
           </div>
 
           <span className="font-mono text-[10px] tracking-hud text-ghost/70">
-            © 2026 — 道場 · ALL EDGES RESERVED
+            {t("footer.rights")}
           </span>
         </div>
       </div>

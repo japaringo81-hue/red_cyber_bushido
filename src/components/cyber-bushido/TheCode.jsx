@@ -2,12 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Loader2, Github, Linkedin, Mail } from "lucide-react";
 import { base44 } from "@/api/base44Client";
+import { useLang } from "@/lib/LanguageContext";
 import KanjiWatermark from "@/components/cyber-bushido/KanjiWatermark";
-import Term from "@/components/cyber-bushido/Term";
+import Kanji from "@/components/cyber-bushido/Kanji";
 import Magnetic from "@/components/cyber-bushido/Magnetic";
 import ImpactButton from "@/components/cyber-bushido/ImpactButton";
 
-// NOTE: Replace these URLs with your real profiles. They are live anchor tags.
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/your-handle", icon: Github },
   { label: "LinkedIn", href: "https://linkedin.com/in/your-handle", icon: Linkedin },
@@ -15,6 +15,7 @@ const SOCIALS = [
 ];
 
 export default function TheCode() {
+  const { t } = useLang();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [err, setErr] = useState("");
@@ -25,7 +26,7 @@ export default function TheCode() {
     e.preventDefault();
     setErr("");
     if (!form.name.trim() || !form.message.trim()) {
-      setErr("A challenge requires a name and an intent.");
+      setErr(t("code.errRequired"));
       return;
     }
     try {
@@ -38,36 +39,35 @@ export default function TheCode() {
       setStatus("sent");
     } catch (e2) {
       setStatus("error");
-      setErr("The signal was lost. Try again.");
+      setErr(t("code.errFailed"));
     }
   };
 
   return (
-    <section id="code" className="relative dojo-floor py-[14vh] border-t border-white/5">
-      <KanjiWatermark kana="掟" />
+    <section id="code" className="relative dojo-floor py-[14vh] border-t border-white/5 scroll-mt-20">
+      <KanjiWatermark kana="掟" opacity={0.1} />
 
       <div className="relative z-10 px-[6vw]">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* left — statement */}
           <div>
             <div className="flex items-center gap-4 mb-5">
               <span className="font-mono text-[11px] text-crimson tracking-hud">04</span>
               <span className="h-px w-12 bg-crimson" />
               <span className="font-mono text-[11px] tracking-hud uppercase text-ghost inline-flex items-center gap-2">
-                <Term kana="掟" reading="okite" meaning="The code; an oath that binds the warrior" className="text-steel text-base" />
-                — THE CODE
+                <Kanji k="掟" className="text-steel text-base" />
+                — {t("code.kicker")}
               </span>
             </div>
             <h2 className="font-heading font-extrabold uppercase tracking-forged text-bone text-[11vw] md:text-[6vw] leading-[0.85]">
-              Leave your<br />
-              <span className="text-crimson">challenge.</span>
+              {t("code.title1")}<br />
+              <span className="text-crimson">{t("code.title2")}</span>
             </h2>
             <p className="mt-8 max-w-md font-body text-base text-ghost leading-[1.8]">
-              Slide your scroll across the dark table. If the challenge is worthy of
-              the blade, a reply will come. Quiet, deliberate, on time.
+              {t("code.body")}
             </p>
 
-            <div className="mt-12 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3">
               {SOCIALS.map((s) => {
                 const Icon = s.icon;
                 return (
@@ -76,7 +76,7 @@ export default function TheCode() {
                     href={s.href}
                     target={s.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel="noreferrer"
-                    className="group flex items-center gap-3 surface-steel surface-steel-hover blade-card sheen px-5 py-4 clip-corner-bl"
+                    className="group flex items-center gap-3 surface-steel surface-steel-hover blade-card sheen px-5 py-4 clip-corner-bl min-h-[44px]"
                   >
                     <Icon size={16} className="text-steel group-hover:text-crimson transition-colors" />
                     <span className="font-mono text-[11px] tracking-hud uppercase text-steel group-hover:text-crimson transition-colors">
@@ -97,77 +97,77 @@ export default function TheCode() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="surface-steel blade-card px-8 py-14 clip-corner-bl text-center"
               >
-                <Term kana="礼" reading="rei" meaning="Respect — the courtesy of a formal bow" bare as="span" className="font-kana text-5xl text-crimson/40 block mb-5" />
+                <Kanji k="礼" bare as="span" className="font-kana text-5xl text-crimson/40 block mb-5" />
                 <h3 className="font-heading font-extrabold uppercase tracking-forged text-bone text-2xl mb-4">
-                  Challenge received.
+                  {t("code.sentTitle")}
                 </h3>
                 <p className="font-body text-sm text-ghost leading-[1.7] max-w-sm mx-auto">
-                  The blade is sheathed. Your scroll has reached the dojo — a reply
-                  arrives within two cycles of the sun.
+                  {t("code.sentBody")}
                 </p>
                 <button
                   onClick={() => {
                     setForm({ name: "", email: "", message: "" });
                     setStatus("idle");
                   }}
-                  className="mt-8 font-mono text-[10px] tracking-hud uppercase text-crimson hover:text-bone transition-colors"
+                  className="mt-8 font-mono text-[10px] tracking-hud uppercase text-crimson hover:text-bone transition-colors min-h-[44px]"
                 >
-                  Issue another →
+                  {t("code.sendAgain")} →
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={submit} className="space-y-10">
+              <form onSubmit={submit} className="space-y-8" noValidate>
                 <Field
                   n="01"
-                  label="Your name"
+                  label={t("code.fieldName")}
                   name="name"
                   value={form.name}
                   onChange={(v) => set("name", v)}
-                  placeholder="The warrior who issues the challenge"
+                  placeholder={t("code.fieldNamePh")}
                 />
                 <Field
                   n="02"
-                  label="Signal channel"
+                  label={t("code.fieldEmail")}
                   name="email"
                   type="email"
                   value={form.email}
                   onChange={(v) => set("email", v)}
-                  placeholder="your@email.com"
+                  placeholder={t("code.fieldEmailPh")}
                 />
                 <div className="group">
-                  <label className="font-mono text-[10px] tracking-hud uppercase text-ghost flex items-center gap-2">
+                  <label htmlFor="message" className="font-mono text-[10px] tracking-hud uppercase text-ghost flex items-center gap-2">
                     <span className="text-crimson">03</span>
                     <span className="h-px w-6 bg-crimson" />
-                    Your challenge
+                    {t("code.fieldMessage")}
                   </label>
                   <textarea
+                    id="message"
                     value={form.message}
                     onChange={(e) => set("message", e.target.value)}
-                    placeholder="State the battle..."
+                    placeholder={t("code.fieldMsgPh")}
                     rows={5}
                     className="w-full mt-3 bg-transparent border-b border-white/10 focus:border-crimson font-body text-base text-bone placeholder:text-ghost/40 py-3 outline-none transition-colors resize-none"
                   />
                 </div>
 
                 {err && (
-                  <p className="font-mono text-[11px] text-crimson -mt-4">{err}</p>
+                  <p role="alert" className="font-body text-sm text-crimson -mt-2">{err}</p>
                 )}
 
                 <Magnetic strength={0.2}>
                   <ImpactButton
                     type="submit"
                     disabled={status === "sending"}
-                    className="group flex items-center gap-4 bg-crimson text-white px-8 py-4 font-mono text-xs tracking-hud uppercase hover:bg-bone hover:text-void transition-colors duration-300 disabled:opacity-60"
+                    className="group flex items-center gap-3 bg-crimson text-white px-8 py-4 min-h-[44px] font-mono text-xs tracking-hud uppercase hover:bg-bone hover:text-void transition-colors duration-300 disabled:opacity-60"
                   >
                     {status === "sending" ? (
                       <>
                         <Loader2 size={14} className="animate-spin" />
-                        Forging the signal
+                        {t("code.sending")}
                       </>
                     ) : (
                       <>
-                        Send the challenge
-                        <Send size={14} className="group-hover:translate-x-1 transition-transform" />
+                        {t("code.send")}
+                        <Send size={14} className="group-hover:translate-x-1 transition-transform rtl:rotate-180" />
                       </>
                     )}
                   </ImpactButton>
