@@ -45,9 +45,9 @@ export default function TheCode() {
 
   return (
     <section id="code" className="relative dojo-floor py-[14vh] border-t border-white/5 scroll-mt-20">
-      <KanjiWatermark kana="掟" opacity={0.1} />
+      <KanjiWatermark kana="掟" position="br" opacity={0.08} />
 
-      <div className="relative z-10 px-[6vw]">
+      <div className="relative z-10 px-6 md:px-[8vw]">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* left — statement */}
           <div>

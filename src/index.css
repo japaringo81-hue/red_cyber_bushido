@@ -270,7 +270,8 @@ html[dir="rtl"] .progress-track { direction: rtl; }
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 80;
+    z-index: 9999;
+    pointer-events: none;
     width: max-content;
     max-width: 240px;
     padding: 8px 12px;

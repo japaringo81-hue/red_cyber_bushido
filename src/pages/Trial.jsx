@@ -61,12 +61,12 @@ export default function Trial() {
       <motion.div key={lang} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
         {/* HERO */}
         <section className="relative min-h-screen flex items-end dojo-floor overflow-hidden">
-          <KanjiWatermark kana={trial.kana} size="44vw" opacity={0.1} />
           <div className="absolute inset-0 z-0">
             <img src={trial.image} alt="" className="w-full h-full object-cover opacity-25" />
             <div className="absolute inset-0 bg-gradient-to-t from-void via-void/60 to-void/80" />
           </div>
-          <div className="relative z-10 px-[6vw] pb-[12vh] pt-[20vh] w-full">
+          <KanjiWatermark kana={trial.kana} position="tr" size="clamp(140px,20vw,340px)" opacity={0.08} className="z-[1]" />
+          <div className="relative z-10 px-6 md:px-[8vw] pb-[12vh] pt-[20vh] w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export default function Trial() {
         </section>
 
         {/* THE CHALLENGE */}
-        <section className="relative py-[16vh] px-[6vw] border-t border-white/5">
+        <section className="relative py-[16vh] px-6 md:px-[8vw] border-t border-white/5">
           <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
             <div className="lg:sticky lg:top-24 self-start">
               <span className="font-mono text-[11px] tracking-hud uppercase text-crimson">
@@ -116,8 +116,8 @@ export default function Trial() {
         </section>
 
         {/* THE STRIKE — timeline */}
-        <section ref={timelineRef} className="relative py-[16vh] px-[6vw] border-t border-white/5 dojo-floor">
-          <KanjiWatermark kana="技" size="32vw" opacity={0.1} />
+        <section ref={timelineRef} className="relative py-[16vh] px-6 md:px-[8vw] border-t border-white/5 dojo-floor">
+          <KanjiWatermark kana="技" position="br" size="clamp(120px,16vw,280px)" opacity={0.08} />
           <div className="relative z-10">
             <div className="mb-16">
               <span className="font-mono text-[11px] tracking-hud uppercase text-crimson">
@@ -176,7 +176,7 @@ export default function Trial() {
         </section>
 
         {/* THE VICTORY */}
-        <section className="relative py-[16vh] px-[6vw] border-t border-white/5">
+        <section className="relative py-[16vh] px-6 md:px-[8vw] border-t border-white/5">
           <div className="mb-14">
             <span className="font-mono text-[11px] tracking-hud uppercase text-crimson">
               {t("trial.victoryKicker")}
@@ -234,8 +234,8 @@ export default function Trial() {
         </section>
 
         {/* RETURN */}
-        <section className="relative py-[14vh] px-[6vw] border-t border-white/5 dojo-floor text-center">
-          <KanjiWatermark kana="帰" size="30vw" opacity={0.1} />
+        <section className="relative py-[14vh] px-6 md:px-[8vw] border-t border-white/5 dojo-floor text-center">
+          <KanjiWatermark kana="帰" position="br" size="clamp(120px,16vw,280px)" opacity={0.08} />
           <div className="relative z-10">
             <Kanji k="帰" bare as="span" className="font-kana text-4xl text-crimson/40 block mb-6" />
             <h2 className="font-heading font-extrabold uppercase tracking-forged text-bone text-3xl md:text-4xl mb-10">

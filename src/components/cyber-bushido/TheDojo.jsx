@@ -31,9 +31,9 @@ export default function TheDojo() {
 
   return (
     <section id="dojo" className="relative dojo-floor py-[14vh] border-t border-white/5 scroll-mt-20">
-      <KanjiWatermark kana="道場" size="28vw" opacity={0.1} />
+      <KanjiWatermark kana="道場" position="br" size="clamp(90px,14vw,240px)" opacity={0.08} />
 
-      <div className="relative z-10 px-[6vw]">
+      <div className="relative z-10 px-6 md:px-[8vw]">
         {/* header */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-5">
