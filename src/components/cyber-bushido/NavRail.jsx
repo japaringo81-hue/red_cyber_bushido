@@ -88,7 +88,9 @@ export default function NavRail() {
               </span>
               <span
                 className={`h-px transition-all duration-300 ${
-                  isActive ? "w-6 bg-crimson" : "w-3 bg-steel/30 group-hover:w-5 group-hover:bg-crimson"
+                  isActive
+                    ? "w-6 bg-crimson"
+                    : "w-3 bg-steel/30 group-hover:w-5 group-hover:bg-crimson animate-breathe"
                 }`}
               />
             </button>
