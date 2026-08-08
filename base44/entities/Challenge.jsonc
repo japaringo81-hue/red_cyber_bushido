@@ -1,0 +1,31 @@
+{
+  "name": "Challenge",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The warrior who issues the challenge"
+    },
+    "email": {
+      "type": "string",
+      "description": "Return signal channel"
+    },
+    "message": {
+      "type": "string",
+      "description": "The challenge itself"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "engaged",
+        "honored"
+      ],
+      "default": "received"
+    }
+  },
+  "required": [
+    "name",
+    "message"
+  ]
+}

@@ -1,33 +1,51 @@
 import { useEffect, useState } from "react";
-import Navigation from "@/components/cyber-bushido/Navigation";
-import HeroSection from "@/components/cyber-bushido/HeroSection";
-import WorkGrid from "@/components/cyber-bushido/WorkGrid";
-import CaseStudy from "@/components/cyber-bushido/CaseStudy";
-import ContactSection from "@/components/cyber-bushido/ContactSection";
+import { AnimatePresence } from "framer-motion";
+import CustomCursor from "@/components/cyber-bushido/CustomCursor";
+import ScanLines from "@/components/cyber-bushido/ScanLines";
+import NavRail from "@/components/cyber-bushido/NavRail";
+import TheGate from "@/components/cyber-bushido/TheGate";
+import ThePath from "@/components/cyber-bushido/ThePath";
+import TheDojo from "@/components/cyber-bushido/TheDojo";
+import TheCode from "@/components/cyber-bushido/TheCode";
 import Footer from "@/components/cyber-bushido/Footer";
 
 export default function Home() {
-  const [sheathed, setSheathed] = useState(true);
+  const [entered, setEntered] = useState(null); // null = unknown, true/false
 
   useEffect(() => {
-    const t = setTimeout(() => setSheathed(false), 950);
-    return () => clearTimeout(t);
+    try {
+      setEntered(localStorage.getItem("cb_entered") === "1");
+    } catch (e) {
+      setEntered(false);
+    }
   }, []);
 
+  const handleEnter = () => setEntered(true);
+
   return (
-    <div className="relative bg-obsidian">
-      {sheathed && (
-        <div className="fixed inset-0 z-[100] pointer-events-none">
-          <div className="absolute inset-0 bg-crimson origin-top animate-sheath" />
-          <div className="absolute inset-0 bg-obsidian origin-top animate-sheath animate-sheath-delay" />
-        </div>
-      )}
-      <Navigation />
+    <div className="relative bg-void">
+      <CustomCursor />
+      <ScanLines />
+
+      <AnimatePresence mode="wait">
+        {entered === false ? (
+          <TheGate key="gate" onEnter={handleEnter} />
+        ) : (
+          <Main key="main" />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function Main() {
+  return (
+    <div className="relative bg-void animate-mist">
+      <NavRail />
       <main>
-        <HeroSection />
-        <WorkGrid />
-        <CaseStudy />
-        <ContactSection />
+        <ThePath />
+        <TheDojo />
+        <TheCode />
       </main>
       <Footer />
     </div>
