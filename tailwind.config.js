@@ -4,38 +4,66 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
-  		borderRadius: { lg: '0px', md: '0px', sm: '0px' },
+  		borderRadius: {
+  			lg: '0px',
+  			md: '0px',
+  			sm: '0px'
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-  			card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
-  			popover: { DEFAULT: 'hsl(var(--popover))', foreground: 'hsl(var(--popover-foreground))' },
-  			primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
-  			secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
-  			muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
-  			accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
-  			destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+  			card: {
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			popover: {
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
+  			},
+  			primary: {
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
+  			},
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
+  			muted: {
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
+  			},
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
+  			},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
-  			void: '#0A0A0F',
-  			steel: '#C0C8D0',
   			crimson: '#FF003C',
-  			indigo: '#4B00E0',
-  			gold: '#D4AF37',
-  			bone: '#EDEDED',
+  			obsidian: '#0A0A0B',
+  			steel: '#E2E2E2',
   			ghost: '#888888'
   		},
   		fontFamily: {
   			heading: ['var(--font-heading)'],
   			body: ['var(--font-body)'],
-  			mono: ['var(--font-mono)'],
+  			display: ['var(--font-display)'],
   			kana: ['var(--font-kana)'],
-  			display: ['var(--font-heading)']
+  			mono: ['var(--font-mono)']
   		},
   		keyframes: {
-  			'accordion-down': { from: { height: '0' }, to: { height: 'var(--radix-accordion-content-height)' } },
-  			'accordion-up': { from: { height: 'var(--radix-accordion-content-height)' }, to: { height: '0' } }
+  			'accordion-down': {
+  				from: { height: '0' },
+  				to: { height: 'var(--radix-accordion-content-height)' }
+  			},
+  			'accordion-up': {
+  				from: { height: 'var(--radix-accordion-content-height)' },
+  				to: { height: '0' }
+  			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',

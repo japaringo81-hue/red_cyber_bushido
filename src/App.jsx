@@ -4,12 +4,10 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import { LanguageProvider } from '@/lib/LanguageContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import ScrollToTop from './components/ScrollToTop';
 // Add page imports here
 import Home from './pages/Home';
-import Trial from './pages/Trial';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -36,14 +34,11 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
-    <LanguageProvider>
-      <Routes>
-        {/* Add your page Route elements here */}
-        <Route path="/" element={<Home />} />
-        <Route path="/trial/:id" element={<Trial />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </LanguageProvider>
+    <Routes>
+      {/* Add your page Route elements here */}
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
 };
 
