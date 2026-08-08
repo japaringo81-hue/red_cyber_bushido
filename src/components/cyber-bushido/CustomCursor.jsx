@@ -30,8 +30,8 @@ export default function CustomCursor() {
     };
 
     const loop = () => {
-      rx += (tx - rx) * 0.18;
-      ry += (ty - ry) * 0.18;
+      rx += (tx - rx) * 0.2;
+      ry += (ty - ry) * 0.2;
       if (trailRef.current) {
         trailRef.current.style.transform = `translate(${rx}px, ${ry}px)`;
       }
@@ -51,18 +51,16 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* blade-line dot */}
+      {/* blade-line dot — clearly visible */}
       <div
         ref={dotRef}
         className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2"
       >
         <div
-          className={`transition-all duration-300 easing-blade ${
-            interactive
-              ? "h-9 w-[2px] bg-crimson"
-              : "h-5 w-[2px] bg-steel/80"
+          className={`transition-all duration-200 easing-blade ${
+            interactive ? "h-10 w-[3px] bg-crimson" : "h-6 w-[2px] bg-steel"
           }`}
-          style={{ boxShadow: interactive ? "0 0 10px var(--crimson)" : "0 0 6px var(--crimson)" }}
+          style={{ boxShadow: interactive ? "0 0 12px var(--crimson), 0 0 4px var(--crimson)" : "0 0 8px var(--crimson)" }}
         />
       </div>
       {/* trailing mist */}
@@ -70,7 +68,7 @@ export default function CustomCursor() {
         ref={trailRef}
         className="pointer-events-none fixed left-0 top-0 z-[9998] -translate-x-1/2 -translate-y-1/2"
       >
-        <div className="h-2 w-2 rounded-full bg-crimson/30 blur-[2px]" />
+        <div className="h-2.5 w-2.5 rounded-full bg-crimson/40 blur-[3px]" />
       </div>
     </>
   );

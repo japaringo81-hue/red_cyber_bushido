@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useLang } from "@/lib/LanguageContext";
 import CustomCursor from "@/components/cyber-bushido/CustomCursor";
 import ScanLines from "@/components/cyber-bushido/ScanLines";
 import NavRail from "@/components/cyber-bushido/NavRail";
+import TopNav from "@/components/cyber-bushido/TopNav";
 import TheGate from "@/components/cyber-bushido/TheGate";
 import ThePath from "@/components/cyber-bushido/ThePath";
 import TheDojo from "@/components/cyber-bushido/TheDojo";
@@ -10,7 +12,8 @@ import TheCode from "@/components/cyber-bushido/TheCode";
 import Footer from "@/components/cyber-bushido/Footer";
 
 export default function Home() {
-  const [entered, setEntered] = useState(null); // null = unknown, true/false
+  const { lang } = useLang();
+  const [entered, setEntered] = useState(null);
 
   useEffect(() => {
     try {
@@ -31,16 +34,24 @@ export default function Home() {
         {entered === false ? (
           <TheGate key="gate" onEnter={handleEnter} />
         ) : (
-          <Main key="main" />
+          <Main key="main" lang={lang} />
         )}
       </AnimatePresence>
     </div>
   );
 }
 
-function Main() {
+function Main({ lang }) {
   return (
-    <div className="relative bg-void animate-mist">
+    <motion.div
+      key={lang}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      id="top"
+      className="relative bg-void"
+    >
+      <TopNav />
       <NavRail />
       <main>
         <ThePath />
@@ -48,6 +59,6 @@ function Main() {
         <TheCode />
       </main>
       <Footer />
-    </div>
+    </motion.div>
   );
 }
